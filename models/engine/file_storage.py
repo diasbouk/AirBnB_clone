@@ -5,6 +5,16 @@
 Main file for our project instances info
 """
 
+import json
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
+
+
 
 class FileStorage:
     """
@@ -37,9 +47,21 @@ class FileStorage:
             """
             serializes __objects to the JSON file (path: __file_path)
             """
+            dict = {}
+            for key in FileStorage.__objects:
+                dictionary[key] = FileStorage.__objects[key].to_dict
+                with open(FileStorage.__file_path, "w") as file:
+                    file.write(json.dumps.dict)
 
         def reload(self):
             """
             deserializes the JSON file to __objects (only if the JSON file (__file_path) exists ;
             otherwise, do nothing. If the file doesn’t exist, no exception should be raised)
             """
+            try:
+                with open(FileStorage.__file_path, "r") as file:
+                    dict = json.load(file.read())
+                for key in dict:
+                     self.new(eval(dictionary[key]["__class__"])(**dictionary[key]))
+                except IOError:
+                    pass
