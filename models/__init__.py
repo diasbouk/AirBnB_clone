@@ -1,1 +1,6 @@
-__all__ = ["base_model", "city"]
+import file_storage
+
+"""
+A new instance of FileStorage
+"""
+storage = FileStorage()
