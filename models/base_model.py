@@ -8,7 +8,7 @@ from uuid import uuid4
 import datetime
 import json
 from datetime import datetime
-from models.engine import file_storage
+# from models.engine import file_storage
 
 
 class BaseModel:
@@ -54,7 +54,7 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            file_storage.new(self)
+            # file_storage.new(self)
 
     def __str__(self):
         """
@@ -76,7 +76,7 @@ class BaseModel:
         class_dict = {}
         for element in self.__dict__:
             class_dict[element] = self.__dict__[element]
-        class_dict["__class__"] = self.__class__.__name__
-        class_dict["created_at"] = self.created_at.isoformat()
-        class_dict["updated_at"] = self.updated_at.isoformat()
+        class_dict["name"] = self.__class__.__name__
+        class_dict["created_at"] = self.created_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
+        class_dict["updated_at"] = self.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
         return class_dict

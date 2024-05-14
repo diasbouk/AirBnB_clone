@@ -33,15 +33,15 @@ class FileStorage:
         """
         return FileStorage.__objects
 
-        def new(self, obj):
-            """
-            sets in __objects the obj with key <obj class name>.id
+    def new(self, obj):
+        """
+        sets in __objects the obj with key <obj class name>.id
 
-            Args:
-                obj:
+        Args:
+            obj:
 
-            """
-            FileStorage.__objects["{}.{}\".format(obj.to_dict()['__class__'], obj.id)] = obj
+        """
+        # FileStorage.__objects["{}.{}\".format(obj.to_dict()['__class__'], obj.id)] = obj
 
     def save(self):
         """
