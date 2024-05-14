@@ -1,13 +1,14 @@
 #!/usr/bin/python3
-<<<<<<< HEAD
 """
 Base model for all classes
 """
 
-import uuid
+
+from uuid import uuid4
 import datetime
 import json
 from datetime import datetime
+from models.engine import file_storage
 
 
 class BaseModel:
@@ -29,7 +30,7 @@ class BaseModel:
              updated_at (datetime): time when has been updated
         """
 
-        self.id = str(uuid.uuid4())
+        self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
 
@@ -46,20 +47,21 @@ class BaseModel:
                 elif key == "updated_at":
                     self.updated_at = datetime.strptime(
                         kwargs[key], "%Y-%m-%dT%H:%M:%S.%f"
-                )
+                    )
                 else:
                     setattr(self, key, kwargs[key])
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            models.storage.new(self)
+            file_storage.new(self)
 
     def __str__(self):
         """
         Class string presentation
         """
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(self.__class__.__name__,
+                                     self.id, self.__dict__)
 
     def save(self):
         """
@@ -78,6 +80,3 @@ class BaseModel:
         class_dict["created_at"] = self.created_at.isoformat()
         class_dict["updated_at"] = self.updated_at.isoformat()
         return class_dict
-=======
-from uuid import uuid4
->>>>>>> Enissay
