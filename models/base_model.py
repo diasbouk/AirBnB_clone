@@ -38,6 +38,8 @@ class BaseModel:
             for key in kwargs:
                 if key == "__class__":
                     pass
+                if key == "name":
+                   self.name = kwargs[key] 
                 elif key == "id":
                     self.id = kwargs[key]
                 elif key == "created_at":
