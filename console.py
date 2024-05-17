@@ -29,7 +29,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_EOF(self, arg):
-        """ Same thing as quit """
+        #  Same thing as quit
         return True
 
 

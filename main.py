@@ -17,6 +17,13 @@ print("--------")
 print(my_model)
 print("--------")
 print(type(my_model))
+print("--------")
+
+my_model.number =  1111
+
+for key in my_model.__dict__:
+    print("{}==> ".format(key), end="")
+    print("{}".format(my_model.__dict__[key]))
 # print(my_model.__dict__[0])
 # print(my_model.__dict__[0])
 # print(my_model.__dict__[0])

@@ -6,13 +6,13 @@ Main file for our project instances info
 """
 
 import json
-from models.base_model import BaseModel
-from models.user import User
-from models.state import State
-from models.city import City
-from models.place import Place
-from models.amenity import Amenity
-from models.review import Review
+# from models.base_model import BaseModel
+# from models.user import User
+# from models.state import State
+# from models.city import City
+# from models.place import Place
+# from models.amenity import Amenity
+# from models.review import Review
 
 
 
@@ -41,7 +41,8 @@ class FileStorage:
             obj:
 
         """
-        # FileStorage.__objects["{}.{}\".format(obj.to_dict()['__class__'], obj.id)] = obj
+        FileStorage.__objects["{}.{}".format(obj.to_dict()['__class__'], obj.id)] = obj
+        # FileStorage.__objects[obj.__class__.__name__.id] = obj
 
     def save(self):
         """
@@ -49,19 +50,19 @@ class FileStorage:
         """
         dict = {}
         for key in FileStorage.__objects:
-            dictionary[key] = FileStorage.__objects[key].to_dict
+            dict[key] = FileStorage.__objects[key]
             with open(FileStorage.__file_path, "w") as file:
-                file.write(json.dumps.dict)
+                file.write(json.dumps(dict))
 
     def reload(self):
         """
         deserializes the JSON file to __objects (only if the JSON file (__file_path) exists ;
         otherwise, do nothing. If the file doesn’t exist, no exception should be raised)
         """
-        try:
-            with open(FileStorage.__file_path, "r") as file:
-                dict = json.load(file.read())
-            for key in dict:
-                 self.new(eval(dictionary[key]["__class__"])(**dictionary[key]))
-            except IOError:
-                pass
+        # try:
+        #     with open(FileStorage.__file_path, "r") as file:
+        #         dict = json.loads(file.read())
+        #     for key in dict:
+        #          self.new(eval(dict[key]["__class__"])(**dict[key]))
+        # except IOError:
+        #     pass
