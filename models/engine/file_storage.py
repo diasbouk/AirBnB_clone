@@ -15,7 +15,6 @@ import json
 # from models.review import Review
 
 
-
 class FileStorage:
     """
     Class representing our storage
@@ -41,7 +40,9 @@ class FileStorage:
             obj:
 
         """
-        FileStorage.__objects["{}.{}".format(obj.to_dict()['__class__'], obj.id)] = obj
+        FileStorage.__objects["{}.{}".format(
+            obj.to_dict()['__class__'],
+            obj.id)] = obj
         # FileStorage.__objects[obj.__class__.__name__.id] = obj
 
     def save(self):
@@ -56,8 +57,10 @@ class FileStorage:
 
     def reload(self):
         """
-        deserializes the JSON file to __objects (only if the JSON file (__file_path) exists ;
-        otherwise, do nothing. If the file doesn’t exist, no exception should be raised)
+        deserializes the JSON file to __objects
+        (only if the JSON file (__file_path) exists ;
+        otherwise, do nothing. If the file doesn’t exist,
+        no exception should be raised)
         """
         # try:
         #     with open(FileStorage.__file_path, "r") as file:
