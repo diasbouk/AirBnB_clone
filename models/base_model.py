@@ -7,7 +7,7 @@ Base model for all classes
 from uuid import uuid4
 import datetime
 
-# import json
+import json
 from datetime import datetime
 
 # from models.engine import file_storage
@@ -37,15 +37,6 @@ class BaseModel:
         self.updated_at = datetime.now()
         # file_storage.new(self)
 
-        # if kwargs == {}:
-        #     # storage.new(self)
-        #     if "id" not in kwargs.keys():
-        #         self.id = str(uuid4())
-        #     if "created_at" not in kwargs.keys():
-        #         self.created_at = datetime.now()
-        #     if "updated_at" not in kwargs.keys():
-        #         self.updated_at = datetime.now()
-
         if kwargs is not None:
             for key in kwargs:
                 if key == "__class__":
@@ -62,17 +53,15 @@ class BaseModel:
                     self.id = kwargs[key]
                 else:
                     setattr(self, key, kwargs[key])
-        # else:
-        #     self.id = str(uuid4())
-        #     self.created_at = datetime.now()
-        #     self.updated_at = datetime.now()
-        #     # file_storage.new(self)
-        #
+
     def __str__(self):
         """
         Class string presentation
         """
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(
+            self.__class__.__name__,
+            self.id, self.__dict__
+        )
 
     def save(self):
         """
