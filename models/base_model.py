@@ -11,7 +11,7 @@ import json
 from datetime import datetime
 
 # from models.engine import file_storage
-from models.__init__ import storage
+# from models.__init__ import storage
 
 
 class BaseModel:
@@ -68,7 +68,7 @@ class BaseModel:
         Updates the time to last update
         """
         self.updated_at = datetime.now()
-        storage.save()
+        # storage.save()
 
     def to_dict(self):
         """

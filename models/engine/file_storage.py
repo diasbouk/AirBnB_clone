@@ -59,10 +59,10 @@ class FileStorage:
         deserializes the JSON file to __objects (only if the JSON file (__file_path) exists ;
         otherwise, do nothing. If the file doesn’t exist, no exception should be raised)
         """
-        try:
-            with open(FileStorage.__file_path, "r") as file:
-                dict = json.loads(file.read())
-            for key in dict:
-                 self.new(eval(dict[key]["__class__"])(**dict[key]))
-        except (FileNotFoundError, JSONDecodeError):
-            pass
+        # try:
+        #     with open(FileStorage.__file_path, "r") as file:
+        #         # dict = json.loads(file.read())
+        #     for key in dict:
+        #          self.new(eval(dict[key]["__class__"])(**dict[key]))
+        # except FileNotFoundError:
+        #     pass
