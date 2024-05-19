@@ -23,6 +23,7 @@ class HBNBCommand(cmd.Cmd):
         """ Handles when user
         enters an empty line ."""
         print("")
+        return 0
 
     def do_quit(self, arg):
         """ Quits """

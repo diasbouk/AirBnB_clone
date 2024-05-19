@@ -14,6 +14,12 @@ class TestConsole(unittest.TestCase):
     def test_prompt(self):
         # tests promtp
         self.assertEqual(cons.prompt, "(hbnb) ")
+    def test_EOF(self):
+        # tests if quit succeed
+        self.assertTrue(cons.do_quit)
+    def test_emptyline(self):
+        # Tests if new line is entered
+        pass
 
 if __name__ == "__main__":
     unittest.main()
