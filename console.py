@@ -10,6 +10,7 @@ from models.base_model import BaseModel
 from models.__init__ import storage
 
 
+
 class HBNBCommand(cmd.Cmd):
     """
     Class representing the commandline prompt

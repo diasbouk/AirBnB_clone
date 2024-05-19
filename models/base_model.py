@@ -19,7 +19,7 @@ class BaseModel:
     Base model
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, **kwargs):
         """
         Init methode of our object
 
