@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Docs 
+Docs
 and imports
 """
 
@@ -13,7 +13,7 @@ class User(BaseModel):
     BaseModel
 
      Attributes:
-     
+
     email: string - empty string
     password: string - empty string
     first_name: string - empty string
@@ -25,4 +25,3 @@ class User(BaseModel):
     password = ''
     first_name = ''
     last_name = ''
-
