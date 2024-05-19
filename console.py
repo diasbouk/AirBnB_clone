@@ -7,6 +7,7 @@ import cmd
 import sys
 
 from models.base_model import BaseModel
+from models.__init__ import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -52,11 +53,14 @@ class HBNBCommand(cmd.Cmd):
         """
         if args[1] != "BaseModel":
             print("** class name dosen't exist **")
-        elif args[1] == "":
+        if args[1] == "":
             print("** class name missing **")
-        elif args[2] == "":
+        if args[2] == "":
             print("** instance id missing **")
         else:
+            for elem in storage.all():
+                if elem.id == args[2]:
+                    print(elem.__str__)
 
 
             
