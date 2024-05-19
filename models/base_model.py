@@ -10,8 +10,8 @@ import datetime
 import json
 from datetime import datetime
 
-# from models.engine import file_storage
-# from models.__init__ import storage
+from models.__init__ import storage
+from models.engine.file_storage import FileStorage
 
 
 class BaseModel:
@@ -35,7 +35,7 @@ class BaseModel:
         self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
-        # file_storage.new(self)
+        storage.new(self)
 
         if kwargs is not None:
             for key in kwargs:
@@ -68,7 +68,7 @@ class BaseModel:
         Updates the time to last update
         """
         self.updated_at = datetime.now()
-        # storage.save()
+        storage.save()
 
     def to_dict(self):
         """

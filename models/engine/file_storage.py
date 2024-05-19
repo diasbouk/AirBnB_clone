@@ -6,6 +6,7 @@ Main file for our project instances info
 """
 
 import json
+
 # from models.base_model import BaseModel
 # from models.user import User
 # from models.state import State
@@ -40,20 +41,17 @@ class FileStorage:
             obj:
 
         """
-        FileStorage.__objects["{}.{}".format(
-            obj.to_dict()['__class__'],
-            obj.id)] = obj
-        # FileStorage.__objects[obj.__class__.__name__.id] = obj
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        FileStorage.__objects[key] = obj
 
     def save(self):
         """
         serializes __objects to the JSON file (path: __file_path)
         """
         dict = {}
-        for key in FileStorage.__objects:
-            dict[key] = FileStorage.__objects[key]
-            with open(FileStorage.__file_path, "w") as file:
-                file.write(json.dumps(dict))
+        with open(FileStorage.__file_path, "w+") as file:
+            dict = {k: v.to_dict() for k, v in self.__objects.items()}
+            json.dump(dict, file)
 
     def reload(self):
         """
@@ -62,10 +60,11 @@ class FileStorage:
         otherwise, do nothing. If the file doesn’t exist,
         no exception should be raised)
         """
-        # try:
-        #     with open(FileStorage.__file_path, "r") as file:
-        #         # dict = json.loads(file.read())
-        #     for key in dict:
-        #          self.new(eval(dict[key]["__class__"])(**dict[key]))
-        # except FileNotFoundError:
-        #     pass
+        try:
+            with open(self.__file_path, "r") as file:
+                dict = json.loads(file.read())
+                for value in dict.values():
+                    cls = value["__class__"]
+                    self.new(eval(cls)(**value))
+        except Exception:
+            pass
