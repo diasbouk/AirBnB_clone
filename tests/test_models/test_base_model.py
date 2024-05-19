@@ -19,7 +19,10 @@ class TestBaseModel(unittest.TestCase):
         base2_id = str(uuid.uuid4())
         base2_created_at = datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")
         base2 = BaseModel(
-            id=base2_id, name="BASE_2", created_at=base2_created_at, random_arg="RANDOM"
+            id=base2_id,
+            name="BASE_2",
+            created_at=base2_created_at,
+            random_arg="RANDOM"
         )
 
         self.assertEqual(type(base2.id), str)
