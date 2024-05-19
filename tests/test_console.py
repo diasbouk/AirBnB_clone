@@ -5,9 +5,9 @@ Import modules and stuff here
 """
 
 import unittest
-import console
+from console import HBNBCommand
 
-cons = console.HBNBCommand()
+cons = HBNBCommand()
 
 class TestConsole(unittest.TestCase):
     # subClass of unittest to test console
