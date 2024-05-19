@@ -7,11 +7,9 @@ Base model for all classes
 from uuid import uuid4
 import datetime
 
-import json
 from datetime import datetime
 
 from models.__init__ import storage
-from models.engine.file_storage import FileStorage
 
 
 class BaseModel:
