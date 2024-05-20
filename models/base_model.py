@@ -55,6 +55,7 @@ class BaseModel:
     def __str__(self):
         """
         Class string presentation
+        returns class name, id , dictionary
         """
         return "[{}] ({}) {}".format(
             self.__class__.__name__,
