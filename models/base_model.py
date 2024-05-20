@@ -66,7 +66,7 @@ class BaseModel:
         Updates the time to last update
         """
         self.updated_at = datetime.now()
-        storage.save()
+        # storage.save()
 
     def to_dict(self):
         """
