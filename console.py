@@ -47,20 +47,21 @@ class HBNBCommand(cmd.Cmd):
             newInstance.save()
             print(newInstance.id)
 
-    def do_show(self, *args):
+    def do_show(self, class_name, id):
         """Shows info of instance based
         on arguments
         """
-        if args[1] != "BaseModel":
-            print("** class name dosen't exist **")
-        if args[1] == "":
+        if class_name == None or class_name == "":
             print("** class name missing **")
-        if args[2] == "":
+        if class_name != "BaseModel":
+            print("** class name dosen't exist **")
+        if id == "" or id == None:
             print("** instance id missing **")
         else:
             for elem in storage.all():
-                if elem.id == args[2]:
+                if elem.id == id:
                     print(elem.__str__)
+                    break
 
 
 if __name__ == "__main__":
