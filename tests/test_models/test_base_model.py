@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """ Import modules and stuff"""
-from datetime import date, datetime
+from datetime import datetime
 import unittest
 import uuid
 from models.base_model import BaseModel
