@@ -66,6 +66,7 @@ class BaseModel:
     def save(self):
         """
         Updates the time to last update
+        calls the storge save methode
         """
         self.updated_at = datetime.now()
         models.storage.save()
