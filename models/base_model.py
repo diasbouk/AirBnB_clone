@@ -75,7 +75,7 @@ class BaseModel:
         class_dict = {}
         for element in self.__dict__:
             class_dict[element] = self.__dict__[element]
-        class_dict["name"] = self.name
+        class_dict["name"] = self.__class__.__name__
         class_dict["__class__"] = self.__class__.__name__
         class_dict["created_at"] = self.created_at.isoformat()
         class_dict["updated_at"] = self.updated_at.isoformat()
