@@ -2,6 +2,7 @@
 
 """
 Entry point of our console
+the console
 """
 import cmd
 import sys
