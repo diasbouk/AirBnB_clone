@@ -2,9 +2,10 @@
 """ import modules herer """
 from models.base_model import BaseModel
 
+
 class State(BaseModel):
     """
-    State class 
+    State class
     Public class attributes:
         name: string - empty string
     """
