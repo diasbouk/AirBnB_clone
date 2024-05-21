@@ -3,7 +3,7 @@
 
 message="commit till 60"
 content="  "
-
+number_of_commits=0
 function gitPush ()
 {
 	git add .
@@ -11,12 +11,15 @@ function gitPush ()
 	git push origin main
 }
 
-for ((i = 0; i <= 3; i++)) do
-  echo $content >> README.md
+
+for ((i = 0; i <= $number_of_commits; i++)) do
+
    # Changing readme by adding new white-spaces
-   gitPush "$message $i"
-  # echo " $ message $i" | gitpush
-  # Passing message as input to gitpush command
+  echo $content >> README.md
+
+  # Passing message as input to gitpush commando
+  gitPush "$message $i"
+
 done
 
 # Dont forget to clean afterwards ==> deleted extra spaces on readme
