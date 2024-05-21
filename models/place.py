@@ -21,7 +21,6 @@ class Place(BaseModel):
         longitude: float - 0.0
         amenity_ids: list of string -
             empty list: it will be the list of Amenity.id later
-
     """
 
     city_id = ""
