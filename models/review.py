@@ -4,7 +4,7 @@
 from models.base_model import BaseModel
 
 
-class Reviews(BaseModel):
+class Review(BaseModel):
     """
     Class Reviews
     Public class attributes:
