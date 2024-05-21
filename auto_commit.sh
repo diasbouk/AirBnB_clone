@@ -1,9 +1,12 @@
 #!/bin/bash
 
-
+# Args to maipulate as needed
 message="commit till 60"
 content="  "
 number_of_commits=0
+
+
+# Usual git stuff
 function gitPush ()
 {
 	git add .
