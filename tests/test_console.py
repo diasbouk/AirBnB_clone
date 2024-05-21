@@ -34,7 +34,7 @@ class TestConsole(unittest.TestCase):
         cons.do_create("")
     def test_show(self):
         # Tests the show function
-        cons.do_show("", "", "")
+        cons.do_show("", "")
 
 
 if __name__ == "__main__":
