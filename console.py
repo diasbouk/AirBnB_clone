@@ -52,11 +52,11 @@ class HBNBCommand(cmd.Cmd):
         """Shows info of instance based
         on arguments
         """
-        if class_name == None or class_name == "":
+        if class_name is None or class_name == "":
             print("** class name missing **")
         if class_name != "BaseModel":
             print("** class name dosen't exist **")
-        if id == "" or id == None:
+        if id == "" or id is None:
             print("** instance id missing **")
         else:
             for elem in storage.all():
