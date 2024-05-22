@@ -13,6 +13,7 @@ cons = HBNBCommand()
 
 class TestConsole(unittest.TestCase):
     # subClass of unittest to test console
+
     def test_prompt(self):
         # tests promtp
         self.assertEqual(cons.prompt, "(hbnb) ")
@@ -32,6 +33,7 @@ class TestConsole(unittest.TestCase):
     def test_create(self):
         # Tests the create function
         cons.do_create("")
+
     def test_show(self):
         # Tests the show function
         cons.do_show("", "")
