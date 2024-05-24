@@ -43,8 +43,11 @@ class TestBaseModel(unittest.TestCase):
 
     def test_save(self):
         # Test if updated_at is changed
-        base.save()
-        self.assertNotEqual(base.created_at, base.updated_at)
+        obj = BaseModel()
+        obj.save()
+        self.assertNotEqual(obj.created_at, obj.updated_at)
+        obj.save()
+        self.assertNotEqual(obj.created_at, obj.updated_at)
 
 
 if __name__ == "__main__":
