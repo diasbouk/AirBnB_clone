@@ -36,11 +36,10 @@ class TestBaseModel(unittest.TestCase):
         # Tests created_at and updated_at times
         self.assertEqual(type(base.created_at), datetime)
 
-    def test_class_str(self):
-        # Tests __str__
-        # self.assertEqual(
-        # )
-        self.assertIsInstance(base, BaseModel)
+    def test_str(self):
+        self.assertTrue(type(base.__str__) != str)
+        self.assertEqual(base.__str__(), "[{}] ({}) {}".format(
+            base.__class__.__name__, base.id, base.__dict__))
 
     def test_save(self):
         # Test if updated_at is changed
