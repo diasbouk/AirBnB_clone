@@ -58,10 +58,14 @@ class BaseModel:
         Class string presentation
         returns class name, id , dictionary
         """
-        return "[{}] ({}) {}".format(
-            self.__class__.__name__,
-            self.id, self.__dict__
-        )
+        print("[{}] ({}) {}".format(type(self).__name__,
+                                    self.id,
+                                    self.__dict__
+                                    ))
+        return "[{}] ({}) {}".format(type(self).__name__,
+                                     self.id,
+                                     self.__dict__
+                                     )
 
     def save(self):
         """
