@@ -49,6 +49,13 @@ class TestBaseModel(unittest.TestCase):
         obj.save()
         self.assertNotEqual(obj.created_at, obj.updated_at)
 
+    def test_to_dict(self):
+         # Tests the to_dict baseModel methode
+        obj = BaseModel()
+        self.assertIsInstance(obj, BaseModel)
+        self.assertIsInstance(obj.to_dict(), object)
+        self.assertTrue(obj.to_dict()[element] == obj.__dict__[element] for element in obj.__dict__)
+
 
 if __name__ == "__main__":
     unittest.main()
