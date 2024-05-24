@@ -42,7 +42,6 @@ class TestBaseModel(unittest.TestCase):
             base.__class__.__name__, base.id, base.__dict__))
 
     def test_save(self):
-        # Test if updated_at is changed
         obj = BaseModel()
         obj.save()
         self.assertNotEqual(obj.created_at, obj.updated_at)
@@ -50,7 +49,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertNotEqual(obj.created_at, obj.updated_at)
 
     def test_to_dict(self):
-         # Tests the to_dict baseModel methode
         obj = BaseModel()
         self.assertIsInstance(obj, BaseModel)
         self.assertIsInstance(obj.to_dict(), object)
