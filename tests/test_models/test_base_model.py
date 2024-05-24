@@ -50,9 +50,10 @@ class TestBaseModel(unittest.TestCase):
 
     def test_to_dict(self):
         obj = BaseModel()
+        dict = obj.to_dict()
         self.assertIsInstance(obj, BaseModel)
         self.assertIsInstance(obj.to_dict(), object)
-        self.assertTrue(obj.to_dict()[element] == obj.__dict__[element] for element in obj.__dict__)
+        self.assertTrue(dict[element] == obj.__dict__[element] for element in obj.__dict__)
 
 
 if __name__ == "__main__":
