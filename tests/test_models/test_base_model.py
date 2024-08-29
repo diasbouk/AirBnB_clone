@@ -63,6 +63,13 @@ class TestBaseModel(unittest.TestCase):
             diff = b.updated_at - date_now
             self.assertTrue(abs(diff.total_seconds()) < 0.01)
 
+            obj = BaseModel()
+            self.assertEqual(str(obj), f"[BaseModel] ({obj.id}) {obj.__dict__}")
+            old_time = obj.updated_at
+            obj.save()
+            new_time = obj.updated_at
+            self.assertLess(old_time, new_time)
+
 
 if __name__ == "__main__":
     unittest.main()
