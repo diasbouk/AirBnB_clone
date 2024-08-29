@@ -40,7 +40,7 @@ class TestBaseModel(unittest.TestCase):
             "[{}] ({}) {}".format(base.__class__.__name__, base.id, base.__dict__),
         )
 
-        def test_dict(self):
+        def test_to_dict(self):
             """Test method for dict"""
             b1 = BaseModel()
             b2_uuid = str(uuid.uuid4())
