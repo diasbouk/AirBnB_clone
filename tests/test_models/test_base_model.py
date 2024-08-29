@@ -40,19 +40,28 @@ class TestBaseModel(unittest.TestCase):
             "[{}] ({}) {}".format(base.__class__.__name__, base.id, base.__dict__),
         )
 
-    def test_save(self):
-        obj = BaseModel()
-        obj.save()
-        self.assertNotEqual(obj.created_at, obj.updated_at)
-        obj.save()
-        self.assertNotEqual(obj.created_at, obj.updated_at)
+        def test_dict(self):
+            """Test method for dict"""
+            b1 = BaseModel()
+            b2_uuid = str(uuid.uuid4())
+            b2 = BaseModel(id=b2_uuid, name="The weeknd", album="Trilogy")
+            b1_dict = b1.to_dict()
+            self.assertIsInstance(b1_dict, dict)
+            self.assertIn("id", b1_dict.keys())
+            self.assertIn("created_at", b1_dict.keys())
+            self.assertIn("updated_at", b1_dict.keys())
+            self.assertEqual(b1_dict["__class__"], type(b1).__name__)
+            with self.assertRaises(KeyError) as e:
+                b2.to_dict()
 
-    def test_to_dict(self):
-        obj = BaseModel()
-        dict = obj.to_dict()
-        self.assertIsInstance(obj, BaseModel)
-        self.assertIsInstance(obj.to_dict(), object)
-        self.assertTrue(dict[element] == obj.__dict__[element] for element in obj.__dict__)
+        def test_save(self):
+            """Test method for save"""
+            b = BaseModel()
+            time.sleep(0.5)
+            date_now = datetime.now()
+            b.save()
+            diff = b.updated_at - date_now
+            self.assertTrue(abs(diff.total_seconds()) < 0.01)
 
 
 if __name__ == "__main__":
