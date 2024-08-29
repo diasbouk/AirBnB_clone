@@ -19,10 +19,7 @@ class TestBaseModel(unittest.TestCase):
         base2_id = str(uuid.uuid4())
         base2_created_at = datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")
         base2 = BaseModel(
-            id=base2_id,
-            name="BASE_2",
-            created_at=base2_created_at,
-            random_arg="RANDOM"
+            id=base2_id, name="BASE_2", created_at=base2_created_at, random_arg="RANDOM"
         )
 
         self.assertEqual(type(base2.id), str)
@@ -38,16 +35,18 @@ class TestBaseModel(unittest.TestCase):
 
     def test_str(self):
         self.assertTrue(type(base.__str__) != str)
-        self.assertEqual(base.__str__(), "[{}] ({}) {}".format(
-            base.__class__.__name__, base.id, base.__dict__))
+        self.assertEqual(
+            base.__str__(),
+            "[{}] ({}) {}".format(base.__class__.__name__, base.id, base.__dict__),
+        )
 
-    # def test_save(self):
-    #     obj = BaseModel()
-    #     obj.save()
-    #     self.assertNotEqual(obj.created_at, obj.updated_at)
-    #     obj.save()
-    #     self.assertNotEqual(obj.created_at, obj.updated_at)
-    #
+    def test_save(self):
+        obj = BaseModel()
+        obj.save()
+        self.assertNotEqual(obj.created_at, obj.updated_at)
+        obj.save()
+        self.assertNotEqual(obj.created_at, obj.updated_at)
+
     # def test_to_dict(self):
     #     obj = BaseModel()
     #     dict = obj.to_dict()
