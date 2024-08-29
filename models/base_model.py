@@ -17,6 +17,9 @@ class BaseModel:
     """
     Base model
     """
+    id = str(uuid4())
+    created_at = datetime.now()
+    updated_at = datetime.now()
 
     def __init__(self, **kwargs):
         """
