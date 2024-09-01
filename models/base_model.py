@@ -1,87 +1,21 @@
-#!/usr/bin/python3
-"""
-Base model for all classes
-"""
-
-
 from uuid import uuid4
-import datetime
-
 from datetime import datetime
 
-from models.__init__ import storage
-import models
-
-
 class BaseModel:
-    """
-    Base model
-    """
-    id = str(uuid4())
-    created_at = datetime.now()
-    updated_at = datetime.now()
-
-    def __init__(self, **kwargs):
-        """
-        Init methode of our object
-
-        Args:
-             *args: Additional positional arguments (if any).
-             **kwargs: Additional keyword arguments (if any).
-
-         Attributes:
-             id (str): The unique identifier of the object.
-             created_at (datetime): time when has been created
-             updated_at (datetime): time when has been updated
-        """
+    # BaseModel class for all other classes
+    #     in tht project
+    def __init__(self):
+        # Class constructor
         self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
-        storage.new(self)
-
-        if kwargs is not None:
-            for key in kwargs:
-                if key == "__class__":
-                    continue
-                elif key == "created_at":
-                    self.created_at = datetime.strptime(
-                        kwargs[key], "%Y-%m-%dT%H:%M:%S.%f"
-                    )
-                elif key == "updated_at":
-                    self.updated_at = datetime.strptime(
-                        kwargs[key], "%Y-%m-%dT%H:%M:%S.%f"
-                    )
-                elif key == "id":
-                    self.id = kwargs[key]
-                else:
-                    setattr(self, key, kwargs[key])
-
     def __str__(self):
-        """
-        Returns the string representation
-        of the instance
-        """
-        return "[{}] ({}) {}".format(
-            type(self).__name__, self.id, self.__dict__)
-
-
+        # String representation of the instance
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}" 
     def save(self):
-        """
-        Updates the time to last update
-        calls the storge save methode
-        """
+        # Saves the current changes
         self.updated_at = datetime.now()
-        models.storage.save()
-
     def to_dict(self):
-        """
-        Saves class info into a dictionary
-        """
-        class_dict = {}
-        for element in self.__dict__:
-            class_dict[element] = self.__dict__[element]
-        class_dict["__class__"] = self.__class__.__name__
-        class_dict["created_at"] = self.created_at.isoformat()
-        class_dict["updated_at"] = self.updated_at.isoformat()
+        # Returns dict of the class
+        return (self.__dict__)
 
-        return class_dict
