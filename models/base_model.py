@@ -22,7 +22,7 @@ class BaseModel:
                 else:
                     setattr(self, key, value)
         if kwargs == {}:
-            storage.new(self.to_dict())
+            storage.new(self)
 
     def __str__(self):
         # String representation of the instance
@@ -39,7 +39,7 @@ class BaseModel:
         new_dict = {}
         for key in old_dict.keys():
             new_dict[key] = old_dict[key]
-        new_dict["__class__"] = self.__class__.__name__
+        new_dict["__class__"] = str(self.__class__.__name__)
         new_dict["created_at"] = self.created_at.isoformat()
         new_dict["updated_at"] = self.updated_at.isoformat()
         return new_dict
