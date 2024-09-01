@@ -21,4 +21,11 @@ class BaseModel:
 
     def to_dict(self):
         # Returns dict of the class
-        return (self.__dict__)
+        old_dict = self.__dict__
+        new_dict = {}
+        for key in old_dict.keys():
+            new_dict[key] = old_dict[key]
+        new_dict["__class__"] = self.__class__.__name__
+        new_dict["created_at"] = self.created_at.isoformat()
+        new_dict["updated_at"] = self.updated_at.isoformat()
+        return (new_dict)
