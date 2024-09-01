@@ -2,12 +2,21 @@
 
 # Docs for imports
 import unittest
+from copy import copy
+from time import sleep
 from models.base_model import BaseModel
 import datetime
 
 
 class TestBaseModel(unittest.TestCase):
     # Class for Basemodel Tests
+
+    def test_types(self):
+        # Tests for types of class mems
+        new_instance = BaseModel()
+        self.assertIsInstance(new_instance.id, str)
+        self.assertIsInstance(new_instance.__str__(), str)
+
     def test_id(self):
         new_instance = BaseModel()
         self.assertEqual(type(new_instance.id), str)
@@ -30,8 +39,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(new_dict['created_at']), str)
         self.assertEqual(type(new_dict['updated_at']), str)
 
-    def test_types(self):
-        # Tests for types of class mems
+    def test_save(self):
         new_instance = BaseModel()
-        self.assertIsInstance(new_instance.id, str)
-        self.assertIsInstance(new_instance.__str__(), str)
+        old_update = copy(new_instance.updated_at)
+        new_instance.save()
+        self.assertNotEqual(new_instance.updated_at, old_update)
