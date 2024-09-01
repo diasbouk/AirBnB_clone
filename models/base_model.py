@@ -5,11 +5,21 @@ from datetime import datetime
 class BaseModel:
     # BaseModel class for all other classes
     #     in tht project
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         # Class constructor
         self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
+        if kwargs is not None:
+            for key, value in kwargs.items():
+                if key == "create_at":
+                    setattr(self, key, datetime.fromisoformat(value))
+                elif key == "updated_at":
+                    setattr(self, key, datetime.fromisoformat(value))
+                elif key == "__class__":
+                    pass
+                else:
+                    setattr(self, key, value)
 
     def __str__(self):
         # String representation of the instance
@@ -28,4 +38,4 @@ class BaseModel:
         new_dict["__class__"] = self.__class__.__name__
         new_dict["created_at"] = self.created_at.isoformat()
         new_dict["updated_at"] = self.updated_at.isoformat()
-        return (new_dict)
+        return new_dict
