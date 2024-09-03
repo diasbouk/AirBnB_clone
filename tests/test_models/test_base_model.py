@@ -94,3 +94,9 @@ class TestBaseModel(unittest.TestCase):
         bm1 = BaseModel()
         bm2 = BaseModel(**bm1.to_dict())
         self.assertEqual(bm1.id, bm2.id)
+
+    def tmp_base_model(self):
+        class BaseModel(BaseModel):
+
+            def save(self):
+                self.updated_at = datetime.now()

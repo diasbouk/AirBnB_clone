@@ -4,6 +4,7 @@ import time
 import json
 from datetime import datetime
 from models.engine.file_storage import FileStorage
+from models.engine import tmp_file_storage
 from models.base_model import BaseModel
 import os
 
@@ -51,6 +52,7 @@ class TestFileStorage(unittest.TestCase):
             pass
 
         ids = []
+        objs_by_id = {}
         for i in range(10):
             bm = BaseModel()
             self.assertIsInstance(bm, BaseModel)
@@ -58,7 +60,9 @@ class TestFileStorage(unittest.TestCase):
             self.assertIsInstance(bm.updated_at, datetime)
             self.assertIsInstance(bm.id, str)
             fs.new(bm)
+            bm.save()
             ids.append(bm.id)
+            objs_by_id[bm.id] = bm
 
         fs.save()
         try:
@@ -74,7 +78,55 @@ class TestFileStorage(unittest.TestCase):
                 all_reloaded.get(id)
                 or all_reloaded.get("{}.{}".format("BaseModel", id))
             )
+        for id in ids:
+            obj_reloaded = all_reloaded.get(id)
+            if obj_reloaded is None:
+                obj_reloaded = all_reloaded.get("{}.{}".format("BaseModel",
+                                                               id))
+            self.assertEqual(obj_reloaded.__class__.__name__, 'BaseModel')
+            obj_created = objs_by_id[id]
+            self.assertTrue(obj_reloaded.id == obj_created.id)
+            self.assertTrue(obj_reloaded.created_at == obj_created.created_at)
+            self.assertTrue(obj_reloaded.updated_at == obj_created.updated_at)
+
         try:
             os.remove(file_path)
         except Exception as e:
             pass
+
+    def test_bm_dattime_conversion(self):
+        bm_init = BaseModel()
+        bm_init.save()
+        try:
+            bm = BaseModel(**bm_init.to_dict())
+        except Exception as Excp:
+            bm = None
+        if bm is None or bm.id != bm_init.id:
+            try:
+                bm = BaseModel(bm_init.to_dict())
+            except Exception as Excp:
+                bm = None
+        self.assertEqual(bm.id, bm_init.id)
+        self.assertEqual(type(bm.created_at), datetime)
+        self.assertTrue(bm.created_at.year == bm_init.created_at.year)
+        self.assertTrue(bm.created_at.month == bm_init.created_at.month)
+        self.assertTrue(bm.created_at.day == bm_init.created_at.day)
+        self.assertTrue(bm.created_at.hour == bm_init.created_at.hour)
+        self.assertTrue(bm.created_at.minute == bm_init.created_at.minute)
+
+    def test_tmp_file_storage(self):
+        class TmpFileStorage(tmp_file_storage.FileStorage):
+            __file_path = None
+            __objects = []
+
+            def all(self):
+                return {}
+
+            def new(self, obj):
+                pass
+
+            def save(self, ojb=None):
+                pass
+
+            def reload(self):
+                pass
