@@ -1,6 +1,6 @@
 from uuid import uuid4
 from datetime import datetime
-from models.__init__ import storage
+import models
 
 
 class BaseModel:
@@ -22,7 +22,7 @@ class BaseModel:
                 else:
                     setattr(self, key, value)
         if kwargs == {}:
-            storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         # String representation of the instance
@@ -31,7 +31,7 @@ class BaseModel:
     def save(self):
         # Saves the current changes
         self.updated_at = datetime.now()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         # Returns dict of the class
@@ -40,6 +40,6 @@ class BaseModel:
         for key in old_dict.keys():
             new_dict[key] = old_dict[key]
         new_dict["__class__"] = str(self.__class__.__name__)
-        new_dict["created_at"] = self.created_at.isoformat()
-        new_dict["updated_at"] = self.updated_at.isoformat()
+        new_dict["created_at"] = f"{self.created_at}"
+        new_dict["updated_at"] = f"{self.updated_at}"
         return new_dict
