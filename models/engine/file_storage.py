@@ -28,7 +28,9 @@ class FileStorage:
         try:
             with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
                 jason = json.load(f)
+                dict = {}
                 for key, val in jason.items():
-                    FileStorage.__objects[key] = BaseModel(**val)
+                    dict = val
+                    FileStorage.__objects[key] = BaseModel(**dict)
         except (FileNotFoundError, ValueError):
             pass
