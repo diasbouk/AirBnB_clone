@@ -1,13 +1,27 @@
+#!/usr/bin/python3
+
+"""
+    The Base model that all other modules of the project will inherite
+    uuid: To generate uuid4 unique ids for each instance
+    datetime: To assign each instance with it's creation and update time
+        using the datetime.now() method
+    models: Modules of our project
+"""
+
 from uuid import uuid4
 from datetime import datetime
 import models
 
 
 class BaseModel:
-    # BaseModel class for all other classes
-    #     in tht project
+    """ The Base class of all other models """
     def __init__(self, *args, **kwargs):
-        # Class constructor
+        """
+            __init__: Our class constructor
+            args: Arguments as strings to create instance
+            kwargs: Dict with attributes to create or recreat
+            and existing instane
+        """
         if len(kwargs):
             for key, value in kwargs.items():
                 if key == "__class__":
@@ -29,7 +43,9 @@ class BaseModel:
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
-        # Saves the current changes
+        """ Save method
+            Save the new created instance
+        """
         self.updated_at = datetime.now()
         models.storage.save()
 
