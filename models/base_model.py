@@ -8,19 +8,19 @@ class BaseModel:
     #     in tht project
     def __init__(self, *args, **kwargs):
         # Class constructor
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
-        if kwargs is not None:
+        if len(kwargs):
             for key, value in kwargs.items():
-                if key == "create_at":
+                if key == "__class__":
+                    continue
+                if key == "created_at" or key == "updated_at":
                     setattr(self, key, datetime.fromisoformat(value))
-                elif key == "updated_at":
                     setattr(self, key, datetime.fromisoformat(value))
-                elif key == "__class__":
-                    pass
                 else:
                     setattr(self, key, value)
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
         if kwargs == {}:
             models.storage.new(self)
 
@@ -40,6 +40,6 @@ class BaseModel:
         for key in old_dict.keys():
             new_dict[key] = old_dict[key]
         new_dict["__class__"] = str(self.__class__.__name__)
-        new_dict["created_at"] = f"{self.created_at}"
-        new_dict["updated_at"] = f"{self.updated_at}"
+        new_dict["created_at"] = self.created_at.isoformat()
+        new_dict["updated_at"] = self.updated_at.isoformat()
         return new_dict
