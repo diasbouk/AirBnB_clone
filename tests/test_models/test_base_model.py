@@ -9,10 +9,10 @@ from datetime import datetime
 
 
 class TestBaseModel(unittest.TestCase):
-    # Class for Basemodel Tests
+    """ Test class for baseModel """
 
     def test_types(self):
-        # Tests for types of class mems
+        """ Tests for Types """
         new_instance = BaseModel()
         self.assertIsInstance(new_instance.id, str)
         self.assertIsInstance(new_instance.__str__(), str)
@@ -20,6 +20,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(new_instance.updated_at, datetime)
 
     def test_id(self):
+        """ Tests for id """
         new_instance = BaseModel()
         new_instance2 = BaseModel()
         self.assertEqual(type(new_instance.id), str)
@@ -27,11 +28,13 @@ class TestBaseModel(unittest.TestCase):
         self.assertNotEqual(new_instance.id, new_instance2.id)
 
     def test_times(self):
+        """ Tests for times """
         new_instance = BaseModel()
         self.assertEqual(type(new_instance.created_at),
                          type(new_instance.updated_at))
 
     def test_string(self):
+        """ Tests for __str__ """
         new_instance = BaseModel()
         string = new_instance.__str__()
         expc = f"[BaseModel] ({new_instance.id}) {new_instance.__dict__}"
@@ -44,6 +47,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(s_bm.split(" ")[1] == "({})".format(bm.id))
 
     def test_to_dict(self):
+        """ Tests for to_dict """
         new_instance = BaseModel()
         new_dict = new_instance.to_dict()
         self.assertEqual(type(new_dict['created_at']), str)
@@ -59,6 +63,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(d_json['__class__']) is str
 
     def test_save(self):
+        """ Tests for save """
         new_instance = BaseModel()
         old_update = copy(new_instance.updated_at)
         new_instance.save()
@@ -71,6 +76,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(d_json['updated_at'], str)
 
     def test_methods(self):
+        """ Tests for methods """
         class bm(BaseModel):
             # Doc
             def __init__(self, *args, **kwargs):
@@ -84,6 +90,7 @@ class TestBaseModel(unittest.TestCase):
                 return ({})
 
     def test_creation_emtpy(self):
+        """ Tests for empty """
         bm1 = BaseModel()
         bm2 = BaseModel()
         self.assertIsInstance(bm1.id, str)
@@ -91,11 +98,13 @@ class TestBaseModel(unittest.TestCase):
         self.assertNotEqual(bm1.id, bm2.id)
 
     def test_creation_from_dict(self):
+        """ Tests for tmp """
         bm1 = BaseModel()
         bm2 = BaseModel(**bm1.to_dict())
         self.assertEqual(bm1.id, bm2.id)
 
     def tmp_base_model(self):
+        """ Tests for tmp """
         class BaseModel(BaseModel):
 
             def save(self):

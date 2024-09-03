@@ -4,19 +4,20 @@ import time
 import json
 from datetime import datetime
 from models.engine.file_storage import FileStorage
-from models.engine import tmp_file_storage
 from models.base_model import BaseModel
 import os
 
 
 class TestFileStorage(unittest.TestCase):
-    # Tests for file_storage
+    """ Tests for FileStorage class """
 
     def test_instance(self):
+        """ Tests for instances """
         fs = FileStorage()
         self.assertIsInstance(fs, FileStorage)
 
     def test_file_path(self):
+        """ Tests for file_path """
         try:
             self.assertTrue(type(FileStorage._FileStorage__file_path) is str)
         except Exception as Excep:
@@ -24,6 +25,7 @@ class TestFileStorage(unittest.TestCase):
             self.assertTrue(type(fs._FileStorage__file_path) is str)
 
     def test_objs(self):
+        """ Tests for objects """
         try:
             self.assertTrue(type(FileStorage._FileStorage__objects) is dict)
         except Exception as Excep:
@@ -31,10 +33,12 @@ class TestFileStorage(unittest.TestCase):
             self.assertTrue(type(fs._FileStorage__objects) is dict)
 
     def test_all(self):
+        """ Tests for all """
         fs = FileStorage()
         self.assertIsInstance(fs.all(), dict)
 
     def test_reload(self):
+        """ Tests for reload """
         fs = FileStorage()
         try:
             file_path = FileStorage._FileStorage__file_path
@@ -95,6 +99,7 @@ class TestFileStorage(unittest.TestCase):
             pass
 
     def test_bm_dattime_conversion(self):
+        """ Tests for datetime """
         bm_init = BaseModel()
         bm_init.save()
         try:
@@ -115,7 +120,8 @@ class TestFileStorage(unittest.TestCase):
         self.assertTrue(bm.created_at.minute == bm_init.created_at.minute)
 
     def test_tmp_file_storage(self):
-        class TmpFileStorage(tmp_file_storage.FileStorage):
+        """ Tests for file_storage """
+        class TmpFileStorage(FileStorage):
             __file_path = None
             __objects = []
 
