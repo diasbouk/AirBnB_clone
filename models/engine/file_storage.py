@@ -14,8 +14,9 @@ class FileStorage:
         return FileStorage.__objects
 
     def new(self, obj):
-        FileStorage.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
-        print(f'OBJ ------> {obj}')
+        FileStorage.__objects["{}.{}".format(obj.__class__.__name__,
+                                             obj.id)] = obj
+        print(f"OBJ ------> {obj}")
 
     def save(self):
         with open(FileStorage.__file_path, "w") as file:
@@ -30,7 +31,5 @@ class FileStorage:
                 jason = json.load(f)
                 for key, val in jason.items():
                     FileStorage.__objects[key] = BaseModel(**val)
-        except ValueError as verr:
-            print(f"Value error ---> {verr}")
-        except FileNotFoundError as ferr:
-            print(f"File error ---> {ferr}")
+        except (FileNotFoundError, ValueError):
+            pass
