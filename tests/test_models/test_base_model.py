@@ -109,5 +109,7 @@ class TestBaseModel(unittest.TestCase):
 
             def save(self):
                 self.updated_at = datetime.now()
+
+
 if __name__ == '__main__':
     unittest.main()

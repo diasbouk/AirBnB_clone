@@ -10,12 +10,15 @@ class HBNBCommand(cmd.Cmd):
     intro = 'intro'
     prompt = '(hbnb) '
     file = None
+
     def do_quit(self, args=None):
         'Quit command to exit the program'
         return True
+
     def do_EOF(self, args=None):
         'EOF command to exit the program'
         return True
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
