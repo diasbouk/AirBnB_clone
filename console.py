@@ -71,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
             return ''
         for ins in self.instances:
             if ins.id == list[1]:
-                print(ins.__str__)
+                print(ins)
 
     def do_sow(self, args=''):
         'tests for show'
