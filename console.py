@@ -73,8 +73,27 @@ class HBNBCommand(cmd.Cmd):
             if ins.id == list[1]:
                 print(ins)
 
-    def do_sow(self, args=''):
-        'tests for show'
+    def do_all(self, args=''):
+        'Show all strs of instances of a model'
+        list = args.split()
+        if len(list) == 0:
+            print('** class doesn\'t exist **')
+            return ''
+        if list[0] not in self.models:
+            print('** class doesn\'t exist **')
+            return ''
+        
+        try:
+            with open ('file.json', 'r') as file:
+                objs = json.load(file)
+                i = 0
+                for key,val in objs.items():
+                    self.instances.append(eval(f'{list[0]}({val})'))
+        except Exception as Err:
+            print(Err)
+        for ins in self.instances:
+            print(ins)
+
 
 
 if __name__ == "__main__":
