@@ -34,6 +34,7 @@ class HBNBCommand(cmd.Cmd):
             return False
         if list[0] not in self.models:
             print('** class doesn\'t exist **')
+            return False
         if len(list) == 1:
             print('** instance id missing **')
             return False
