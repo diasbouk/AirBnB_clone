@@ -75,7 +75,7 @@ class HBNBCommand(cmd.Cmd):
             if ins.id == list[1]:
                 print(ins)
 
-    def do_destory(self, args=''):
+    def do_destroy(self, args=''):
         'Deletes an instance'
         list = args.split()
         if len(list) == 0:
@@ -83,7 +83,7 @@ class HBNBCommand(cmd.Cmd):
             return ''
         if list[0] not in self.models:
             print('** class doesn\'t exist **')
-        if len(list) < 2:
+        if len(list) == 1:
             print('** instance id missing **')
             return ''
         ids = [el.id for el in self.base_model_instances]
