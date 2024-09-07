@@ -7,6 +7,7 @@
 """
 import json
 from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
@@ -48,7 +49,8 @@ class FileStorage:
                 dict = {}
                 for key, val in jason.items():
                     dict = val
-                    FileStorage.__objects[key] = BaseModel(**dict)
+                    class_name = key.split('.')[0]
+                    FileStorage.__objects[key] = eval(f'{class_name}({dict})')
         except (FileNotFoundError, ValueError):
             pass
 
