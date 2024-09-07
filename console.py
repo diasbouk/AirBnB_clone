@@ -17,13 +17,14 @@ class HBNBCommand(cmd.Cmd):
     models = ["BaseModel"]
     base_model_instances = []
     try:
-            
+
         storage.reload()
         objs = storage.all()
         for key, val in objs.items():
             base_model_instances.append(val)
     except Exception as Err:
         print(Err)
+
     def do_quit(self, *args):
         "Quit command to exit the program"
         return True
@@ -83,10 +84,9 @@ class HBNBCommand(cmd.Cmd):
         if list[0] not in self.models:
             print('** class doesn\'t exist **')
             return ''
-        
+
         for ins in self.base_model_instances:
             print(ins)
-
 
 
 if __name__ == "__main__":
