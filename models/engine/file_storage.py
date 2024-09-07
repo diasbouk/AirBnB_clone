@@ -54,7 +54,8 @@ class FileStorage:
 
     def destroy(self, instance):
         """ Destroys an instance """
-        for key,val in self.__objects.copy().items():
+        for key, val in self.__objects.copy().items():
             if val == instance:
-                del self.__objects[f'{instance.__class__.__name__}.{instance.id}']
+                index = f'{instance.__class__.__name__}.{instance.id}'
+                del self.__objects[index]
                 self.save()
