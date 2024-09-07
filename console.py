@@ -15,7 +15,14 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     file = None
     models = ["BaseModel"]
-    instances = []
+    base_model_instances = []
+    try:
+            
+        objs = storage.all()
+        for key, val in objs.items():
+            base_model_instances.append(val)
+    except Exception as Err:
+        print(Err)
     def do_quit(self, *args):
         "Quit command to exit the program"
         return True
@@ -57,24 +64,16 @@ class HBNBCommand(cmd.Cmd):
         if len(list) < 2:
             print('** instance id missing **')
             return ''
-        try:
-            with open ('file.json', 'r') as file:
-                objs = json.load(file)
-                i = 0
-                for key,val in objs.items():
-                    self.instances.append(BaseModel(**val))
-        except Exception as Err:
-            print(Err)
-        ids = [el.id for el in self.instances]
+        ids = [el.id for el in self.base_model_instances]
         if list[1] not in ids:
             print('** no instance found **')
             return ''
-        for ins in self.instances:
+        for ins in self.base_model_instances:
             if ins.id == list[1]:
                 print(ins)
 
     def do_all(self, args=''):
-        'Show all strs of instances of a model'
+        'Show all strs of base_model_instances of a model'
         list = args.split()
         if len(list) == 0:
             print('** class doesn\'t exist **')
@@ -83,15 +82,7 @@ class HBNBCommand(cmd.Cmd):
             print('** class doesn\'t exist **')
             return ''
         
-        try:
-            with open ('file.json', 'r') as file:
-                objs = json.load(file)
-                i = 0
-                for key,val in objs.items():
-                    self.instances.append(eval(f'{list[0]}({val})'))
-        except Exception as Err:
-            print(Err)
-        for ins in self.instances:
+        for ins in self.base_model_instances:
             print(ins)
 
 
