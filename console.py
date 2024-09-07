@@ -100,15 +100,13 @@ class HBNBCommand(cmd.Cmd):
         'Show all strs of base_model_instances of a model'
         list = args.split()
         if len(list) == 0:
-            print('** class doesn\'t exist **')
-            return ''
+            for ins in self.base_model_instances:
+                print(ins)
+                return ''
         if list[0] not in self.models:
             print('** class doesn\'t exist **')
             return ''
-
         for ins in self.base_model_instances:
             print(ins)
 
 
-if __name__ == "__main__":
-    HBNBCommand().cmdloop()
