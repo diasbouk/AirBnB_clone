@@ -51,3 +51,10 @@ class FileStorage:
                     FileStorage.__objects[key] = BaseModel(**dict)
         except (FileNotFoundError, ValueError):
             pass
+
+    def destroy(self, instance):
+        """ Destroys an instance """
+        if instance not in self.__objects:
+            return False
+        self.__objects.pop(instance)
+        self.save()
