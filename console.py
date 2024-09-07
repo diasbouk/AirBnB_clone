@@ -77,7 +77,6 @@ class HBNBCommand(cmd.Cmd):
 
         list = args.split()
         if self.check_arguments(args) is False:
-            print('Error')
             return ''
         for ins in self.base_model_instances:
             if ins.id == list[1]:
