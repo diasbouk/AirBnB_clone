@@ -15,6 +15,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     file = None
     models = ["BaseModel"]
+    all_instances = []
     base_model_instances = []
     try:
 
@@ -24,6 +25,23 @@ class HBNBCommand(cmd.Cmd):
             base_model_instances.append(val)
     except Exception as Err:
         print(Err)
+
+    def check_arguments(self, args=''):
+        """ Check for args valid"""
+        list = args.split()
+        if len(list) == 0:
+            print('** class name missing **')
+            return False
+        if list[0] not in self.models:
+            print('** class doesn\'t exist **')
+        if len(list) == 1:
+            print('** instance id missing **')
+            return False
+        ids = [el.id for el in self.base_model_instances]
+        if list[1] not in ids:
+            print('** no instance found **')
+            return False
+        return True
 
     def do_quit(self, *args):
         "Quit command to exit the program"
@@ -54,22 +72,12 @@ class HBNBCommand(cmd.Cmd):
             except Exception as Err:
                 print(Err)
 
-    def do_show(self, args):
+    def do_show(self, args=''):
         "Shows info of an instance using its id"
 
         list = args.split()
-        if len(list) == 0:
-            print('** class name missing **')
-            return ''
-        if list[0] != 'BaseModel':
-            print('** class doesn\'t exist **')
-            return ''
-        if len(list) < 2:
-            print('** instance id missing **')
-            return ''
-        ids = [el.id for el in self.base_model_instances]
-        if list[1] not in ids:
-            print('** no instance found **')
+        if self.check_arguments(args) is False:
+            print('Error')
             return ''
         for ins in self.base_model_instances:
             if ins.id == list[1]:
@@ -78,17 +86,7 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, args=''):
         'Deletes an instance'
         list = args.split()
-        if len(list) == 0:
-            print('** class name missing **')
-            return ''
-        if list[0] not in self.models:
-            print('** class doesn\'t exist **')
-        if len(list) == 1:
-            print('** instance id missing **')
-            return ''
-        ids = [el.id for el in self.base_model_instances]
-        if list[1] not in ids:
-            print('** no instance found **')
+        if self.check_arguments(args) is False:
             return ''
         for el in self.base_model_instances:
             if el.id == list[1]:
@@ -109,4 +107,24 @@ class HBNBCommand(cmd.Cmd):
         for ins in self.base_model_instances:
             print(ins)
 
+    def do_update(self, args=''):
+        'Updates an instance'
+        list = args.split()
+        if self.check_arguments(args) is False:
+            return ''
+        if len(list) == 2:
+            print('** attribute name missing **')
+            return ''
+        if len(list) == 3:
+            print('** value missing **')
+            return ''
+        try:
+            for ins in self.base_model_instances:
+                if ins.id == list[1]:
+                    setattr(ins, list[2], list[3])
+        except Exception as Err:
+            print(Err)
 
+
+if __name__ == '__main__':
+    HBNBCommand().cmdloop()
