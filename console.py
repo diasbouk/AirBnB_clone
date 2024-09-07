@@ -18,6 +18,7 @@ class HBNBCommand(cmd.Cmd):
     base_model_instances = []
     try:
             
+        storage.reload()
         objs = storage.all()
         for key, val in objs.items():
             base_model_instances.append(val)
@@ -48,6 +49,7 @@ class HBNBCommand(cmd.Cmd):
                 bm = eval(f"{args[0]}()")
                 print(bm.id)
                 bm.save()
+                self.base_model_instances.append(bm)
             except Exception as Err:
                 print(Err)
 
