@@ -40,18 +40,26 @@ class BaseModel:
             models.storage.new(self)
 
     def __str__(self):
-        # String representation of the instance
+        """__str__ methode
+        returns the string repr of the instance
+        """
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
-        """Save methode
+        """save methode
         Saves the current instance
+        using datetime.now() to update time
+        using storage.new() to save the instance in
+        the storage
         """
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        # Returns dict of the class
+        """to_dict method
+        returns a dictionary holding all instance
+        attributes and their values att->val
+        """
         old_dict = self.__dict__
         new_dict = {}
         for key in old_dict.keys():
