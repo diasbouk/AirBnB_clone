@@ -43,9 +43,7 @@ class BaseModel:
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
-        """ Save method
-            Save the new created instance
-        """
+        # Saves the current instance
         self.updated_at = datetime.now()
         models.storage.save()
 
