@@ -101,6 +101,8 @@ class HBNBCommand(cmd.Cmd):
                 index = self.all_instances.index(el)
                 self.all_instances.pop(index)
                 storage.destroy(el)
+                return ''
+        print('** no instance found **')
 
     def do_all(self, args=''):
         'Show all strs of base_model_instances of a model'
@@ -127,12 +129,11 @@ class HBNBCommand(cmd.Cmd):
         if len(list) == 3:
             print('** value missing **')
             return ''
-        try:
-            for ins in self.all_instances:
-                if ins.id == list[1] and ins.__class__.__name__ == list[0]:
-                    setattr(ins, list[2], list[3])
-        except Exception as Err:
-            print(Err)
+        for ins in self.all_instances:
+            if ins.id == list[1] and ins.__class__.__name__ == list[0]:
+                setattr(ins, list[2], list[3])
+            return ''
+        print('** no instance found **')
 
 
 if __name__ == '__main__':
