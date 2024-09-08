@@ -21,4 +21,3 @@ class TestPlace(unittest.TestCase):
         self.assertIsInstance(instance.latitude, float)
         self.assertIsInstance(instance.longitude, float)
         self.assertIsInstance(instance.amenity_ids, list)
-
