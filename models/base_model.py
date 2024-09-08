@@ -50,7 +50,7 @@ class BaseModel:
         save: The save method
         saves the current instance
         """
-        self.updated_at = datetime.utcnow()
+        self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
