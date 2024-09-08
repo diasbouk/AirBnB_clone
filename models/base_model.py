@@ -14,13 +14,14 @@ import models
 
 
 class BaseModel:
-    """ The Base class of all other models """
+    """The Base class of all other models"""
+
     def __init__(self, *args, **kwargs):
         """
-            __init__: Our class constructor
-            args: Arguments as strings to create instance
-            kwargs: Dict with attributes to create or recreat
-            and existing instane
+        __init__: Our class constructor
+        args: Arguments as strings to create instance
+        kwargs: Dict with attributes to create or recreat
+        and existing instane
         """
         if len(kwargs):
             for key, value in kwargs.items():
@@ -43,7 +44,9 @@ class BaseModel:
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
-        # Saves the current instance
+        """Save methode
+        Saves the current instance
+        """
         self.updated_at = datetime.now()
         models.storage.save()
 
