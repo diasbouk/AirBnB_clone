@@ -34,7 +34,7 @@ class HBNBCommand(cmd.Cmd):
 
     def check_arguments(self, args=''):
         """ Check for args valid"""
-        list = args.split()
+        list = args.split(' ')
         if len(list) == 0:
             print('** class name missing **')
             return False
@@ -88,6 +88,8 @@ class HBNBCommand(cmd.Cmd):
         for ins in self.all_instances:
             if ins.id == list[1] and list[0] == ins.__class__.__name__:
                 print(ins)
+                return ''
+        print('** no instance found **')
 
     def do_destroy(self, args=''):
         'Deletes an instance'
