@@ -36,7 +36,8 @@ class FileStorage:
     def new(self, obj):
         """Creates new objects and insert it
         to the __objects dict"""
-        FileStorage.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
+        FileStorage.__objects["{}.{}".format(obj.__class__.__name__,
+                                             obj.id)] = obj
 
     def save(self):
         """Saves all objects to file.json"""
@@ -55,7 +56,8 @@ class FileStorage:
                 for key, val in jason.items():
                     dict = val
                     class_name = key.split(".")[0]
-                    FileStorage.__objects[key] = eval(f"{class_name}(**{dict})")
+                    FileStorage.__objects[key] = eval(
+                        f"{class_name}(**{dict})")
         except (FileNotFoundError, ValueError):
             pass
 
