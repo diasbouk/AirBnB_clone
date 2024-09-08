@@ -8,6 +8,11 @@ from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models.__init__ import storage
 from models.user import User
+from models.state import State
+from models.amenity import Amenity
+from models.review import Review
+from models.place import Place
+from models.city import City
 import json
 
 
@@ -15,10 +20,9 @@ class HBNBCommand(cmd.Cmd):
     intro = ""
     prompt = "(hbnb) "
     file = None
-    models = ["BaseModel", "User"]
+    models = ["BaseModel", "User", "State",
+              "Place", "Amenity", "Review", "City"]
     all_instances = []
-    User_instances = []
-    BaseModel_instances = []
     try:
 
         storage.reload()
@@ -108,7 +112,6 @@ class HBNBCommand(cmd.Cmd):
             return ''
         for ins in self.all_instances:
             if ins.__class__.__name__ == args:
-                print(f'{ins.__class__.__name__} === {args}')
                 print(ins)
 
     def do_update(self, args=''):
