@@ -53,14 +53,13 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(new_dict['created_at']), str)
         self.assertEqual(type(new_dict['updated_at']), str)
         bm = BaseModel()
-        ##
         bm.updated_at = datetime.now()
         d_json = bm.to_dict()
         self.assertTrue(type(d_json) is dict)
         self.assertTrue(type(d_json['id']) is str)
         self.assertTrue(type(d_json['created_at']), str)
         self.assertTrue(type(d_json['__class__']) is str)
-        self.assertTrue(d_json['__class__']) is str
+        self.assertTrue(type(d_json['__class__']) is str)
 
     def test_save(self):
         """ Tests for save """
