@@ -4,6 +4,7 @@
 from models.user import User
 from unittest import TestCase
 
+
 class TestUser(TestCase):
     # Class for User class tests
     def test_types(self):
