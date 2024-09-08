@@ -107,10 +107,11 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args=''):
         'Show all strs of base_model_instances of a model'
 
-        if len(args) == 0:
+        if args == '':
+            print('empty')
             for ins in self.all_instances:
                 print(ins)
-                return ''
+            return ''
         if args not in self.models:
             print('** class doesn\'t exist **')
             return ''
