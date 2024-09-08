@@ -55,7 +55,7 @@ class FileStorage:
                 for key, val in jason.items():
                     dict = val
                     class_name = key.split(".")[0]
-                    FileStorage.__objects[key] = eval(f"{class_name}({dict})")
+                    FileStorage.__objects[key] = eval(f"{class_name}(**{dict})")
         except (FileNotFoundError, ValueError):
             pass
 
