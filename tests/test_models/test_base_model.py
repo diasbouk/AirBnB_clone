@@ -61,7 +61,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(type(d_json['__class__']) is str)
         self.assertTrue(type(d_json['__class__']) is str)
 
-    def test_save(self):
+    def test_if_saved(self):
         """ Tests for save """
         new_instance = BaseModel()
         old_update = copy(new_instance.updated_at)
