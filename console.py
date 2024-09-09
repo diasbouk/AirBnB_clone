@@ -143,9 +143,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         if list[1] == 'all()':
-            for ins in self.all_instances:
-                if ins.__class__.__name__ == list[0]:
-                    print(ins)
+            self.do_all(list[0])
             return
 
         if list[1] == 'count()':
@@ -159,9 +157,7 @@ class HBNBCommand(cmd.Cmd):
         new_list = list[1].split('(')
         if new_list[0] == 'show':
             id = new_list[1].split(')')[0]
-            for ins in self.all_instances:
-                if ins.id == id:
-                    print(ins)
+            self.do_show(f'{list[0]} {id}')
             return
 
 
