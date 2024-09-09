@@ -135,6 +135,23 @@ class HBNBCommand(cmd.Cmd):
             return ''
         print('** no instance found **')
 
+    def default(self, line):
+        'unrecongnized commands'
+        list = line.split('.')
+        if len(list) != 2:
+            return
+        if list[1] == 'all()':
+            for ins in self.all_instances:
+                if ins.__class__.__name__ == list[0]:
+                    print(ins)
+            return
+        if list[1] == 'count()':
+            count = 0
+            for ins in self.all_instances:
+                if ins.__class__.__name__ == list[0]:
+                    count += 1
+            print(count)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
