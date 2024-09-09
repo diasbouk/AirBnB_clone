@@ -4,6 +4,7 @@
     For imports and stuff
 """
 import cmd
+import re
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models.__init__ import storage
@@ -140,17 +141,28 @@ class HBNBCommand(cmd.Cmd):
         list = line.split('.')
         if len(list) != 2:
             return
+
         if list[1] == 'all()':
             for ins in self.all_instances:
                 if ins.__class__.__name__ == list[0]:
                     print(ins)
             return
+
         if list[1] == 'count()':
             count = 0
             for ins in self.all_instances:
                 if ins.__class__.__name__ == list[0]:
                     count += 1
             print(count)
+            return
+
+        new_list = list[1].split('(')
+        if new_list[0] == 'show':
+            id = new_list[1].split(')')[0]
+            for ins in self.all_instances:
+                if ins.id == id:
+                    print(ins)
+            return
 
 
 if __name__ == '__main__':
