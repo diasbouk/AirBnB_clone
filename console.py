@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+# New line here
+
 """
     For imports and stuff
 """
@@ -33,21 +35,21 @@ class HBNBCommand(cmd.Cmd):
     except Exception as Err:
         print(Err)
 
-    def check_arguments(self, args=''):
-        """ Check for args valid"""
-        list = args.split(' ')
+    def check_arguments(self, args=""):
+        """Check for args valid"""
+        list = args.split(" ")
         if len(list) == 0:
-            print('** class name missing **')
+            print("** class name missing **")
             return False
         if list[0] not in self.models:
-            print('** class doesn\'t exist **')
+            print("** class doesn't exist **")
             return False
         if len(list) == 1:
-            print('** instance id missing **')
+            print("** instance id missing **")
             return False
         ids = [el.id for el in self.all_instances]
         if list[1] not in ids:
-            print('** no instance found **')
+            print("** no instance found **")
             return False
         return True
 
@@ -80,73 +82,73 @@ class HBNBCommand(cmd.Cmd):
             except Exception as Err:
                 print(Err)
 
-    def do_show(self, args=''):
+    def do_show(self, args=""):
         "Shows info of an instance using its id"
 
         list = args.split()
         if self.check_arguments(args) is False:
-            return ''
+            return ""
         for ins in self.all_instances:
             if ins.id == list[1] and list[0] == ins.__class__.__name__:
                 print(ins)
-                return ''
-        print('** no instance found **')
+                return ""
+        print("** no instance found **")
 
-    def do_destroy(self, args=''):
-        'Deletes an instance'
+    def do_destroy(self, args=""):
+        "Deletes an instance"
         list = args.split()
         if self.check_arguments(args) is False:
-            return ''
+            return ""
         for el in self.all_instances:
             if el.id == list[1] and list[0] == el.__class__.__name__:
                 index = self.all_instances.index(el)
                 self.all_instances.pop(index)
                 storage.destroy(el)
-                return ''
-        print('** no instance found **')
+                return ""
+        print("** no instance found **")
 
-    def do_all(self, args=''):
-        'Show all strs of base_model_instances of a model'
+    def do_all(self, args=""):
+        "Show all strs of base_model_instances of a model"
 
-        if args == '':
+        if args == "":
             for ins in self.all_instances:
                 print(ins)
-            return ''
+            return ""
         if args not in self.models:
-            print('** class doesn\'t exist **')
-            return ''
+            print("** class doesn't exist **")
+            return ""
         for ins in self.all_instances:
             if ins.__class__.__name__ == args:
                 print(ins)
 
-    def do_update(self, args=''):
-        'Updates an instance'
+    def do_update(self, args=""):
+        "Updates an instance"
         list = args.split()
         if self.check_arguments(args) is False:
-            return ''
+            return ""
         if len(list) == 2:
-            print('** attribute name missing **')
-            return ''
+            print("** attribute name missing **")
+            return ""
         if len(list) == 3:
-            print('** value missing **')
-            return ''
+            print("** value missing **")
+            return ""
         for ins in self.all_instances:
             if ins.id == list[1] and ins.__class__.__name__ == list[0]:
                 setattr(ins, list[2], list[3])
-            return ''
-        print('** no instance found **')
+            return ""
+        print("** no instance found **")
 
     def default(self, line):
-        'unrecongnized commands'
-        list = line.split('.')
+        "unrecongnized commands"
+        list = line.split(".")
         if len(list) != 2:
             return
 
-        if list[1] == 'all()':
+        if list[1] == "all()":
             self.do_all(list[0])
             return
 
-        if list[1] == 'count()':
+        if list[1] == "count()":
             count = 0
             for ins in self.all_instances:
                 if ins.__class__.__name__ == list[0]:
@@ -154,20 +156,24 @@ class HBNBCommand(cmd.Cmd):
             print(count)
             return
 
-        new_list = list[1].split('(')
-        if new_list[0] == 'show':
-            id = new_list[1].split(')')[0]
-            self.do_show(f'{list[0]} {id}')
+        new_list = list[1].split("(")
+        if new_list[0] == "show":
+            id = new_list[1].split(")")[0]
+            self.do_show(f"{list[0]} {id}")
             return
-        if new_list[0] == 'destroy':
-            id = new_list[1].split(')')[0]
-            self.do_destroy(f'{list[0]} {id}')
+        if new_list[0] == "destroy":
+            id = new_list[1].split(")")[0]
+            self.do_destroy(f"{list[0]} {id}")
             return
-        if new_list[0] == 'update':
-            info = new_list[1].split(')')[0]
+        if new_list[0] == "update":
+            info = new_list[1].split(")")[0]
+            if "{" in info[1] and "}" in info[1]:
+                dict = eval(f'{info[1].split(",")[1]}')
+                for key, val in dict.items():
+                    self.do_update(f"{list[0]} {key} {val}")
             self.do_update(f'{list[0]} {info.replace(",", " ")}')
             return
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     HBNBCommand().cmdloop()
