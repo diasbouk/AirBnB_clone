@@ -176,14 +176,16 @@ class HBNBCommand(cmd.Cmd):
                 try:
                     for ins in self.all_instances:
                         if ins.id == id:
-                            for key, val in json.loads(dict.replace("'", '"')).items():
+                            dict = json.loads(dict.replace("'", '"'))
+                            for key, val in dict.items():
                                 setattr(ins, key, val)
                 except Exception as Err:
                     print(Err)
             else:
-                self.do_update(f'{list[0]} {id} {info.replace(",", " ")}')
+                self.do_update(f'{list[0]} {info.replace(",", " ")}')
             storage.save(self.all_instances)
             return
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
