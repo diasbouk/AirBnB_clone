@@ -172,11 +172,9 @@ class HBNBCommand(cmd.Cmd):
             dict = info.split(',', 1)[1]
             if '{' in dict and '}' in dict:
                 try:
-                    for ins in self.all_instances:
-                        if ins.id == id:
-                            dict = json.loads(dict.replace("'", '"'))
-                            for key, val in dict.items():
-                                setattr(ins, key, val)
+                    dict = json.loads(dict.replace("'", '"'))
+                    for key, val in dict.items():
+                        self.do_update(f'{list[0]} {id} {key} {val}')
                 except Exception as Err:
                     pass
             else:
