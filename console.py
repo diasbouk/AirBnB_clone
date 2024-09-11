@@ -171,4 +171,5 @@ class HBNBCommand(cmd.Cmd):
             self.do_update(f'{list[0]} {info.replace(",", " ")}')
             return
 
-
+if __name__ == "__main__":
+    HBNBCommand().cmdloop()
