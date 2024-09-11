@@ -135,6 +135,7 @@ class HBNBCommand(cmd.Cmd):
         for ins in self.all_instances:
             if ins.id == list[1] and ins.__class__.__name__ == list[0]:
                 setattr(ins, list[2], list[3])
+                storage.save(self.all_instances)
             return ""
         print("** no instance found **")
 
@@ -167,10 +168,7 @@ class HBNBCommand(cmd.Cmd):
             return
         if new_list[0] == "update":
             info = new_list[1].split(")")[0]
-            if "{" in info[1] and "}" in info[1]:
-                dict = eval(f'{info[1].split(",")[1]}')
-                for key, val in dict.items():
-                    self.do_update(f"{list[0]} {key} {val}")
+            print(info)
             self.do_update(f'{list[0]} {info.replace(",", " ")}')
             return
 
