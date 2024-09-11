@@ -167,8 +167,22 @@ class HBNBCommand(cmd.Cmd):
             self.do_destroy(f"{list[0]} {id}")
             return
         if new_list[0] == "update":
+            id = new_list[1].split(",")[0]
+            print(f'id --> {id}')
             info = new_list[1].split(")")[0]
-            self.do_update(f'{list[0]} {info.replace(",", " ")}')
+            dict = info.split(',', 1)[1]
+            print(dict)
+            if '{' in dict and '}' in dict:
+                try:
+                    for ins in self.all_instances:
+                        if ins.id == id:
+                            for key, val in json.loads(dict.replace("'", '"')).items():
+                                setattr(ins, key, val)
+                except Exception as Err:
+                    print(Err)
+            else:
+                self.do_update(f'{list[0]} {id} {info.replace(",", " ")}')
+            storage.save(self.all_instances)
             return
 
 if __name__ == "__main__":
