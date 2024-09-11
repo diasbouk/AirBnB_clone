@@ -37,8 +37,8 @@ class HBNBCommand(cmd.Cmd):
 
     def check_arguments(self, args=""):
         """Check for args valid"""
-        list = args.split(" ")
-        if len(list) == 0:
+        list = args.split()
+        if args == '':
             print("** class name missing **")
             return False
         if list[0] not in self.models:
@@ -172,5 +172,3 @@ class HBNBCommand(cmd.Cmd):
             return
 
 
-if __name__ == "__main__":
-    HBNBCommand().cmdloop()
