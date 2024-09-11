@@ -168,10 +168,8 @@ class HBNBCommand(cmd.Cmd):
             return
         if new_list[0] == "update":
             id = new_list[1].split(",")[0]
-            print(f'id --> {id}')
             info = new_list[1].split(")")[0]
             dict = info.split(',', 1)[1]
-            print(dict)
             if '{' in dict and '}' in dict:
                 try:
                     for ins in self.all_instances:
@@ -180,7 +178,7 @@ class HBNBCommand(cmd.Cmd):
                             for key, val in dict.items():
                                 setattr(ins, key, val)
                 except Exception as Err:
-                    print(Err)
+                    pass
             else:
                 self.do_update(f'{list[0]} {info.replace(",", " ")}')
             storage.save(self.all_instances)
