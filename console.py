@@ -168,7 +168,6 @@ class HBNBCommand(cmd.Cmd):
             return
         if new_list[0] == "update":
             info = new_list[1].split(")")[0]
-            print(info)
             self.do_update(f'{list[0]} {info.replace(",", " ")}')
             return
 
