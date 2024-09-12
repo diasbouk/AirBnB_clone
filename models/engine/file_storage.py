@@ -47,7 +47,7 @@ class FileStorage:
             jason = {}
             for k, v in FileStorage.__objects.items():
                 jason[k] = v.to_dict()
-            json.dump(jason, file)
+            json.dump(jason, file, sort_keys=True, indent=4)
 
     def reload(self):
         """Reloads the instances from the file.json"""
